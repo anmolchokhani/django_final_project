@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+    {% load static %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Base Page{% endblock title %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'appp1/css/bootstrap.css' %}" >
+  </head>
+  <body>
+
+
+<div class="container mt-5 mb-5 pb-5 ml-5 pl-5" > 
+    <h2 class=" text-center alert alert-danger">
+        <div class="text">All QBOX DETAILS</div>
+    </h2>
+
+{% block body %}
+    {% endblock body%}
+
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'appp1/js/bootstrap.js'%}"></script>
+    <script src="{% static 'appp1/js/popper.js'%}"></script>
+    <script src="{% static 'appp1/js/jquery.js'%}"></script>
+    </body>
+</html>

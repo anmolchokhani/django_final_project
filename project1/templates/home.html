@@ -1,0 +1,144 @@
+{% extends './base.html' %}
+
+{% block body %} 
+
+<div class="row pb-3">
+{% if messages %}
+    {% for message in messages %}
+       <span class="text-bg-success p-3 text-center"> {{message}} </span>
+    {% endfor %}
+{% endif %}
+</div>
+
+<div class="container">
+<div class='d-flex justify-content-between'>
+    <form method="get" class=''>
+        {{myFilter.form}}
+        <button class="btn btn-primary " type="submit" class="col-md-2">Search</button>
+    </form>
+
+    <div class="">
+        <a href="{% url 'logout' %}" class=" btn btn-warning "> logout </a>
+    
+    </div>
+    
+</div>
+
+
+</div>
+
+
+
+
+
+<br><br>
+
+{% comment %} <div class="row container mb-2 mr-5">
+    <div class="col-md-8"> {% endcomment %}
+    {% comment %} <h4 class="alert alert-success text-center ">QBOX DETAILS</h4> {% endcomment %}
+    {% if details %}
+    <div class="table-responsive">
+        <table class="table table-hover mb-2 mr-5">
+            <thead>
+            <tr class="text-center">
+                <th scope="col"> ID </th>
+                <th scope="col"> Name</th>
+                <th scope="col"> BoxNo</th>
+                <th scope="col"> Email</th>
+                <th scope="col"> Password</th>
+                <th scope="col"> Source</th>
+                <th scope="col"> Teleport</th>
+                <th scope="col">SudoPassword</th>
+                <th scope="col"> Apihub</th>
+                <th scope="col"> Web_Frontend</th>
+                <th scope="col"> Checkpoints</th>
+                <th scope="col"> Cxr_Api</th>
+                <th scope="col"> Dcmio</th>
+                <th scope="col"> Addtional</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dt in details %}
+            <tr>    
+                <th scope="row">{{dt.id}}</th>
+                <td>{{dt.name}}</td>
+                <td>{{dt.qbox_no}}</td>
+                <td>{{dt.email}}</td>
+                <td>{{dt.password}}</td>
+                <td>{{dt.source}}</td>
+                <td>{{dt.teleport}}</td>
+                <td>{{dt.sudo_password}}</td>
+                <td>{{dt.apihub}}</td>
+                <td>{{dt.web_frontend}}</td>
+                <td>{{dt.checkpoints|truncatechars:10}}</td>
+                <td>{{dt.cxr_api}}</td>
+                <td>{{dt.dcmio}}</td>
+                <td>{{dt.additional|truncatechars:10}}</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'updatedetail' dt.id %}" class="btn btn-warning"> Edit </a> 
+                        
+                        
+                        <form method="POST" action="{% url 'delete' dt.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" value="delete" class="btn btn-danger"> 
+                        </form>
+                    </div> 
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h4 class="alert alert-danger text-center">No Records</h4>
+    
+    {% endif %}
+    
+    {% comment %} </div>
+
+</div> {% endcomment %}
+
+
+
+    <div class="row">
+        <div class="col-sm-8">
+            <h4 class="alert alert-success text-center">Add New Box Detail </h4>
+        </div>
+            {% comment %} <div class="col-sm-4 ">
+                <a href="{% url 'logout' %}" class=" btn btn-warning float-right"> logout </a>
+                </div>
+           {% endcomment %}
+    
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{box.non_field_errors}}
+{% for bx in box %}
+            <div class="row m-2 align-items-center">
+                <label class="col-3">
+                    {{bx.label_tag}}
+                </label>
+                <div class="col-4">
+                    {{ bx }}
+                </div>
+                {% comment %} {{bx}} {% endcomment %}
+            </div>
+        {% endfor %} 
+
+
+        {% comment %} <div class="col-md-4 mb-2 ">
+            {{bx}}
+        </div> {% endcomment %}
+
+    {% comment %} <div class="col-md-4 mb-2 ">{{box}}</div> {% endcomment %}
+     
+        <div class="container mt-3">
+        <input type="submit" class="btn btn-success" value="Submit">
+        </div>
+    </form>
+    </div>
+
+
+
+{% endblock body %}

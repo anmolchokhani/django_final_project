@@ -1,0 +1,41 @@
+{% extends './base.html' %}
+
+{% block title %} Update Page {% endblock title %}
+
+{% block body %}
+
+
+<div class="row pb-3">
+    {% if messages %}
+        {% for message in messages %}
+           <span class="text-bg-success p-3 text-center"> {{message}} </span>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+<div class="col-sm-8  mb-3">
+<form method="POST">
+{% csrf_token %}
+{% for field in form%}
+
+<div class="row m-2 align-items-center">
+    <label class="col-2">
+    
+{{field.label_tag}}
+    </label>
+    <div class="col-4">
+        {{field}}
+    </div>
+    {% comment %} {{bx}} {% endcomment %}
+</div>
+
+{% endfor %}
+</div>
+<input type='submit' value="Update" class="btn btn-success">
+<a href="{% url 'add_new_student' %}" class= "btn btn-warning">Home</a>
+</form>
+
+
+
+
+{% endblock body %}
